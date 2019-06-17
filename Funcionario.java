@@ -4,6 +4,12 @@ public class Funcionario {
     private static String[] adress;
     private static int ID;
     private static double salary;
+    private static int type;
+
+    /* 1 --> horista
+       2 --> salaried
+       3 --> commisioned
+     */
 
     public void setName(String name)
     {
@@ -23,7 +29,7 @@ public class Funcionario {
         return adress;
     }
 
-    public void setSalary(int id)
+    public void setSalary(double salary)
     {
         this.salary=salary;
     }
@@ -44,6 +50,10 @@ public class Funcionario {
     public void setID(int id)
     {
         this.ID=id;
+    }
+    public void setType(int type)
+    {
+        this.type=type;
     }
 
 
