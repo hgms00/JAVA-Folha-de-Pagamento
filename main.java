@@ -2,9 +2,21 @@ import java.util.Scanner;
 
 public class main {
 
+
+
+
     private static void main(String[] args)
     {
+
+         Funcionario employee[] = new Funcionario[1000];
             private static int command = 1;
+            private static int qt_funcionario = 0;
+            private static String[] name;
+            private static String[] adress;
+            private static double salary;
+            private static int type;
+            private static int id;
+
 
             while(command!=0)
             {
@@ -28,6 +40,34 @@ public class main {
                 switch(command)
                 {
                     case 1:
+                        qt_funcionario++;
+                        Funcionario[qt_funcionario] = new Funcionario();
+
+                        System.out.println("Digite o nome do funcionário");
+                        name = input.nextLine();
+                        employee[qt_funcionario].setName(name);
+
+                        System.out.println("Digite o endereço do funcionário");
+                        adress = input.nextLine();
+                        employee[qt_funcionario].setAdress(adress);
+
+                        System.out.println("Selecione o tipo do funcionário");
+                        System.out.println("1 --> Horista");
+                        System.out.println("2 --> Assalariado");
+                        System.out.println("3 --> Comissionado");
+
+                        type = input.nextInt();
+                        employee[qt_funcionario].setType(type);
+
+                        System.out.println("Digite o salário do funcionário");
+                        salary = input.nextDouble();
+                        employee[qt_funcionario].setSalary(salary);
+
+                        id = (2019*1000) + qt_funcionario;
+                        employee[qt_funcionario].setID(id);
+
+                        System.out.printf("--> O ID de funcionário é : %d",id);
+
 
 
                         break;
