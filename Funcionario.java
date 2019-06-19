@@ -54,11 +54,6 @@ public class Funcionario {
         Funcionario.hora_entrada = hora_entrada;
     }
 
-    public static void setHoras_trabalhada(int horas)
-    {
-        this.horas_trabalhada=horas;
-    }
-
     public static void setHora_saida(int hora_saida) {
         Funcionario.hora_saida = hora_saida;
     }
@@ -132,7 +127,7 @@ public class Funcionario {
         return ID;
     }
 
-    public static void setID(int ID) {
+    public void setID(int ID) {
         Funcionario.ID = ID;
     }
 
