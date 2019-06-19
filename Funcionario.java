@@ -23,15 +23,29 @@ public class Funcionario {
 
     //sindicato
     private static int sindicato;
-
-
-
-
+    private static double taxa_sindical;
+    private static int id_sindicato;
 
     /* 1 --> horista
        2 --> salaried
        3 --> commisioned
-     */
+    */
+
+    public static double getTaxa_sindical() {
+        return taxa_sindical;
+    }
+
+    public static void setTaxa_sindical(double taxa_sindical) {
+        Funcionario.taxa_sindical = taxa_sindical;
+    }
+
+    public static int getId_sindicato() {
+        return id_sindicato;
+    }
+
+    public static void setId_sindicato(int id_sindicato) {
+        Funcionario.id_sindicato = id_sindicato;
+    }
 
     public static int getSindicato() {
         return sindicato;
