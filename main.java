@@ -2,34 +2,37 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static int buscarFuncionario(int id,int qt_funcionario,Funcionario employee)
+    private static int dia=26;
+    private static int mes=06;
+    private static int hora=7;
+
+
+    private static int buscarFuncionario(int id,int qt_funcionario,Funcionario[] employee)
     {
         int i;
 
         for(i=1;i<=qt_funcionario;i++)
         {
-            if(employee[i].getID==id)
+            if(employee[i].getID()==id)
             {
                 return i;
             }
         }
     }
-
-
-     public static void main(String[] args)
+    public static void main(String[] args)
     {
-         Funcionario employee[] = new Funcionario[1000];
-         int command = 1;
-         String name;
-         String adress;
-         double salary;
-         int type;
-         int id;
-         int qt_funcionario = 0;
-         int id_sindicato;
-         int sindicato;
-         int indice;
-         double taxa_sindicato;
+        Funcionario employee[] = new Funcionario[1000];
+        int command = 1;
+        String name;
+        String adress;
+        double salary;
+        int type;
+        int id;
+        int qt_funcionario = 0;
+        int id_sindicato;
+        int sindicato;
+        int indice;
+        double taxa_sindicato;
 
 
 
@@ -57,7 +60,32 @@ public class Main {
             {
                 case 1:
                     qt_funcionario++;
-                    employee[qt_funcionario] = new Funcionario();
+
+                    //--------------------------------------------
+                    System.out.println("Selecione o tipo do funcionário");
+                    System.out.println("1 --> Horista");
+                    System.out.println("2 --> Assalariado");
+                    System.out.println("3 --> Comissionado");
+                    //--------------------------------------------
+
+
+                    type = input.nextInt();
+
+
+                    if(type==1)
+                    {
+                        employee[qt_funcionario] = new Horista();
+                    }
+                    else if(type==2)
+                    {
+                        employee[qt_funcionario] = new Salariado();
+                    }
+                    else if(type==3)
+                    {
+                        employee[qt_funcionario] = new Comissionado();
+                    }
+
+                    employee[qt_funcionario].setType(type);
 
                     //--------------------------------------------
                     System.out.println("Digite o nome do funcionário");
@@ -73,17 +101,6 @@ public class Main {
 
                     adress = input.nextLine();
                     employee[qt_funcionario].setAdress(adress);
-
-                    //--------------------------------------------
-                    System.out.println("Selecione o tipo do funcionário");
-                    System.out.println("1 --> Horista");
-                    System.out.println("2 --> Assalariado");
-                    System.out.println("3 --> Comissionado");
-                    //--------------------------------------------
-
-
-                    type = input.nextInt();
-                    employee[qt_funcionario].setType(type);
 
 
                     //Setando o pagamento e a existência
@@ -133,7 +150,7 @@ public class Main {
                 case 2:
 
                     System.out.println("Digite o ID do funcionário que vocẽ quer remover");
-                    id = nextInt();
+                    id = input.nextInt();
 
                     indice = buscarFuncionario(id,qt_funcionario,employee);
 
@@ -141,9 +158,38 @@ public class Main {
                     {
                         System.out.println("O funcionário não existe");
                     }
+                    else if(employee[indice].isExiste()==true)
+                    {
+                        System.out.println("O funcionário foi removido com sucesso");
+                        employee[indice].setExiste(false);
+                    }
 
+                    break;
+                case 3:
+                    System.out.println("Digite o ID do funcionário para bater o ponto");
+                    id = input.nextInt();
 
+                    indice = buscarFuncionario(id,qt_funcionario,employee);
 
+                    if(employee[indice].isIn_work()==false)
+                    {
+                        employee[indice].setIn_work(true);
+                        employee[indice].setHora_entrada(hora);
+
+                        System.out.println("Ponto de entrada computado com sucesso");
+                    }
+                    else
+                    {
+                        employee[indice].setIn_work(false);
+                        employee[indice].setHora_saida(hora);
+
+                        if(employee[indice] instanceof Horista)
+                        {
+                            ((Horista) employee[indice]).setHoras_diarias(3);
+                        }
+
+                        System.out.println("Ponto de saída computado com sucesso");
+                    }
                     break;
             }
 
