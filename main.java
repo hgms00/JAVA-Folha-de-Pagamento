@@ -5,6 +5,7 @@ public class Main {
     private static int dia=26;
     private static int mes=06;
     private static int hora=7;
+    private static int ano=2019;
 
 
     private static int buscarFuncionario(int id,int qt_funcionario,Funcionario[] employee)
@@ -18,6 +19,7 @@ public class Main {
                 return i;
             }
         }
+        return -1;
     }
     public static void main(String[] args)
     {
@@ -70,6 +72,7 @@ public class Main {
 
 
                     type = input.nextInt();
+                    input.nextLine();
 
 
                     if(type==1)
@@ -133,7 +136,7 @@ public class Main {
                         employee[qt_funcionario].setTaxa_sindical(taxa_sindicato);
 
 
-                        id_sindicato = (2019*10) + qt_funcionario;
+                        id_sindicato = (1000) + qt_funcionario;
                         employee[qt_funcionario].setId_sindicato(id_sindicato);
                         System.out.printf("--> O ID do sindicato do funcionário é : %d\n",id_sindicato);
                     }
