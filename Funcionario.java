@@ -26,10 +26,42 @@ public class Funcionario {
     private static double taxa_sindical;
     private static int id_sindicato;
 
+    //ponto
+    private static int hora_entrada;
+    private static int hora_saida;
+    private static int minuto_entrada;
+    private static int minuto_saida;
+
+    private static boolean in_work;
+
+
     /* 1 --> horista
        2 --> salaried
+
        3 --> commisioned
     */
+
+
+    public static boolean isIn_work() {
+        return in_work;
+    }
+
+    public static void setIn_work(boolean in_work) {
+        Funcionario.in_work = in_work;
+    }
+
+    public static void setHora_entrada(int hora_entrada) {
+        Funcionario.hora_entrada = hora_entrada;
+    }
+
+    public static void setHoras_trabalhada(int horas)
+    {
+        this.horas_trabalhada=horas;
+    }
+
+    public static void setHora_saida(int hora_saida) {
+        Funcionario.hora_saida = hora_saida;
+    }
 
     public static double getTaxa_sindical() {
         return taxa_sindical;
