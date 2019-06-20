@@ -34,7 +34,13 @@ public class Main {
         int id_sindicato;
         int sindicato;
         int indice;
+        float percentual;
+        int payment_type;
         double taxa_sindicato;
+        double taxa_servico;
+        int command_dados;
+
+        int aux;
 
 
 
@@ -63,17 +69,14 @@ public class Main {
                 case 1:
                     qt_funcionario++;
 
-                    //--------------------------------------------
+                    //-----------------TYPE-----------------------------
                     System.out.println("Selecione o tipo do funcionário");
                     System.out.println("1 --> Horista");
                     System.out.println("2 --> Assalariado");
                     System.out.println("3 --> Comissionado");
-                    //--------------------------------------------
-
 
                     type = input.nextInt();
                     input.nextLine();
-
 
                     if(type==1)
                     {
@@ -89,21 +92,19 @@ public class Main {
                     }
 
                     employee[qt_funcionario].setType(type);
-
                     //--------------------------------------------
+
+                    //----------------NOME-----------------------
                     System.out.println("Digite o nome do funcionário");
-                    //--------------------------------------------
-
-
                     name = input.nextLine();
                     employee[qt_funcionario].setName(name);
-
                     //--------------------------------------------
+
+                    //----------------ADRESS-------------------
                     System.out.println("Digite o endereço do funcionário");
-                    //--------------------------------------------
-
                     adress = input.nextLine();
                     employee[qt_funcionario].setAdress(adress);
+                    //--------------------------------------------
 
 
                     //Setando o pagamento e a existência
@@ -112,22 +113,50 @@ public class Main {
 
 
 
+                    //----------------SALARY-------------------------
+                    if(employee[qt_funcionario] instanceof Salariado)
+                    {
+                        System.out.println("Digite o salário do funcionário");
+                        salary = input.nextDouble();
+                        ((Salariado) employee[qt_funcionario]).setSalary(salary);
+                    }
+                    else if(employee[qt_funcionario] instanceof Comissionado)
+                    {
+                        System.out.println("Digite o salário do funcionário");
+                        salary = input.nextDouble();
+                        ((Comissionado) employee[qt_funcionario]).setSalary(salary);
+                        System.out.println("Digite o percentual de venda do funcionário");
+                        System.out.println("Exemplo : Digite 30, para se referir a 30%");
+                        percentual = input.nextFloat();
+                        ((Comissionado)employee[qt_funcionario]).setPercentual(percentual);
+                    }
+                    else if(employee[qt_funcionario] instanceof Horista)
+                    {
+                        System.out.println("Digite o salário por hora do funcionário");
+                        salary = input.nextDouble();
+                        ((Horista)employee[qt_funcionario]).setSalario_por_hora(salary);
+                    }
                     //--------------------------------------------
-                    System.out.println("Digite o salário do funcionário");
-                    //--------------------------------------------
 
+                    //---------Payment_Type-----------------------
+                    System.out.println("Selecione o seu método de pagamento");
+                    System.out.println("1 -> Cheque pelos correios");
+                    System.out.println("2 -> Em mãos");
+                    System.out.println("3 -> Depósito em conta bancária");
 
-                    salary = input.nextDouble();
-                    employee[qt_funcionario].setSalary(salary);
+                    payment_type = input.nextInt();
+                    employee[qt_funcionario].setMetodo_de_pagamento(payment_type);
 
-
-                    //--------------------------------------------
+                    //-------------SINDICATO---------------------------
                     System.out.println("O funcionário pertence ao sindicato?");
                     System.out.println("0 --> NÃO");
                     System.out.println("1 --> SIM");
 
                     sindicato = input.nextInt();
-                    employee[qt_funcionario].setSindicato(sindicato);
+                    if(sindicato==1)
+                        employee[qt_funcionario].setSindicato(true);
+                    else
+                        employee[qt_funcionario].setSindicato(false);
 
                     if(sindicato == 1)
                     {
@@ -157,7 +186,7 @@ public class Main {
 
                     indice = buscarFuncionario(id,qt_funcionario,employee);
 
-                    if(employee[indice].isExiste()==false)
+                    if(indice==-1 || employee[indice].isExiste()==false)
                     {
                         System.out.println("O funcionário não existe");
                     }
@@ -173,6 +202,11 @@ public class Main {
                     id = input.nextInt();
 
                     indice = buscarFuncionario(id,qt_funcionario,employee);
+                    if(indice==-1 || employee[indice].isExiste()==false)
+                    {
+                        System.out.println("O funcionário não existe");
+                        break;
+                    }
 
                     if(employee[indice].isIn_work()==false)
                     {
@@ -188,12 +222,78 @@ public class Main {
 
                         if(employee[indice] instanceof Horista)
                         {
-                            ((Horista) employee[indice]).setHoras_diarias(3);
+                            ((Horista) employee[indice]).setHoras_diarias(((employee[indice].getHora_saida()-(employee[indice].getHora_entrada()))));
                         }
 
                         System.out.println("Ponto de saída computado com sucesso");
                     }
                     break;
+                case 4:
+
+                    System.out.println("Digite o ID do funcionário");
+                    id = input.nextInt();
+                    indice = buscarFuncionario(id,qt_funcionario,employee);
+                    if(indice==-1 || employee[indice].isExiste()==false)
+                    {
+                        System.out.println("O funcionário não existe");
+                        break;
+                    }
+
+                    System.out.println("Digite o dia da venda");
+                    aux = input.nextInt();
+                    System.out.println("Digite o valor da venda");
+                    ((Comissionado) employee[indice]).setValor_venda(input.nextDouble(),aux);
+
+                    System.out.println("Venda computada com sucesso");
+
+                    break;
+                case 5:
+                    System.out.println("Digite o ID do que será cobrada as taxas de serviços");
+                    id = input.nextInt();
+                    indice = buscarFuncionario(id,qt_funcionario,employee);
+                    if(indice==-1 || employee[indice].isExiste()==false)
+                    {
+                        System.out.println("O funcionário não existe");
+                        break;
+                    }
+
+                    if(employee[indice].isSindicato()==false)
+                    {
+                        System.out.println("O funcionário não pertence ao sindicato");
+                        break;
+                    }
+
+                    System.out.println("Digite o valor da taxa de serviço a ser descontada");
+                    taxa_servico = input.nextDouble();
+
+                    employee[indice].setTaxa_servico(taxa_servico);
+
+                    break;
+                case 6:
+                    System.out.println("Digite o ID do funcionário para alterar seus dados");
+                    id = input.nextInt();
+                    indice = buscarFuncionario(id,qt_funcionario,employee);
+                    if(indice==-1 || employee[indice].isExiste()==false)
+                    {
+                        System.out.println("O funcionário não existe");
+                        break;
+                    }
+
+                    System.out.println("O que você deseja alterar?\n");
+                    System.out.println("1. Nome");
+                    System.out.println("2. Endereço");
+                    System.out.println("3. Tipo");
+                    System.out.println("4. Método de Pagamento");
+                    System.out.println("5. Adesão ao sindicato");
+                    System.out.println("6. Identificação no sindicato");
+                    System.out.println("7. Taxa Sindical");
+                    System.out.println("0. Cancelar");
+
+
+
+
+                    break;
+
             }
 
         }
