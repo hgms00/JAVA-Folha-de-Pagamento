@@ -3,7 +3,8 @@ public class Funcionario {
     private static String name;
     private static String adress;
     private static int ID;
-    private static double salary;
+    private static int metodo_de_pagamento;
+
     private static int type;
     private static boolean existe = false;
 
@@ -14,6 +15,12 @@ public class Funcionario {
     3 -> semanas determinadas
      */
 
+    /*metodo de pagamento
+    1 -> Cheque pelos correios
+    2 -> Em Mãos
+    3 -> Depósito em conta bancária
+     */
+
     //mensal
     private static int mensal_data_receber;
 
@@ -21,10 +28,12 @@ public class Funcionario {
     private static int a_cada_semana;
     private static int semanal_dia_receber;
 
+
     //sindicato
-    private static int sindicato;
+    private static boolean sindicato;
     private static double taxa_sindical;
     private static int id_sindicato;
+    private static double taxa_servico;
 
     //ponto
     private static int hora_entrada;
@@ -37,9 +46,32 @@ public class Funcionario {
 
     /* 1 --> horista
        2 --> salaried
-
        3 --> commisioned
     */
+
+    public static double getTaxa_servico() {
+        return taxa_servico;
+    }
+
+    public static void setTaxa_servico(double taxa_servico) {
+        Funcionario.taxa_servico += taxa_servico;
+    }
+
+    public static int getMetodo_de_pagamento() {
+        return metodo_de_pagamento;
+    }
+
+    public static void setMetodo_de_pagamento(int metodo_de_pagamento) {
+        Funcionario.metodo_de_pagamento = metodo_de_pagamento;
+    }
+
+    public static int getHora_entrada() {
+        return hora_entrada;
+    }
+
+    public static int getHora_saida() {
+        return hora_saida;
+    }
 
 
     public static boolean isIn_work() {
@@ -74,11 +106,11 @@ public class Funcionario {
         Funcionario.id_sindicato = id_sindicato;
     }
 
-    public static int getSindicato() {
+    public static boolean isSindicato() {
         return sindicato;
     }
 
-    public static void setSindicato(int sindicato) {
+    public static void setSindicato(boolean sindicato) {
         Funcionario.sindicato = sindicato;
     }
 
@@ -127,16 +159,8 @@ public class Funcionario {
         return ID;
     }
 
-    public void setID(int ID) {
+    public static void setID(int ID) {
         Funcionario.ID = ID;
-    }
-
-    public static double getSalary() {
-        return salary;
-    }
-
-    public static void setSalary(double salary) {
-        Funcionario.salary = salary;
     }
 
     public static int getType() {
