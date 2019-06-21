@@ -21,6 +21,19 @@ public class Main {
         }
         return -1;
     }
+    public static int buscarFuncionarioSindicato(int id,int qt_funcionario,Funcionario[] employee)
+    {
+        int i;
+        for(i=1;i<=qt_funcionario;i++)
+        {
+            if(employee[i].getId_sindicato()==id)
+            {
+                return i;
+            }
+        }
+        return -1;
+
+    }
     public static void main(String[] args)
     {
         Funcionario employee[] = new Funcionario[1000];
@@ -374,13 +387,70 @@ public class Main {
 
                             break;
                         case 5:
+                                input.nextLine();
+                                System.out.println("O funcionário pertence ao sindicato?");
+                                System.out.println("0 --> Não");
+                                System.out.println("1 --> Sim");
+                                sindicato = input.nextInt();
+                                if(sindicato==1)
+                                {
+                                    employee[indice].setSindicato(true);
+                                    System.out.println("Digite a taxa mensal do sindicato");
+                                    taxa_sindicato = input.nextDouble();
+                                    employee[qt_funcionario].setTaxa_sindical(taxa_sindicato);
 
+
+                                    id_sindicato = (1000) + qt_funcionario;
+                                    employee[qt_funcionario].setId_sindicato(id_sindicato);
+                                    System.out.printf("--> O ID do sindicato do funcionário é : %d\n",id_sindicato);
+                                }
+                                else
+                                {
+                                    employee[indice].setSindicato(false);
+
+                                }
+                            break;
+                        case 6:
+                            aux=1;
+
+                            while(aux!=0)
+                            {
+                                System.out.println("Digite seu novo ID do sindicato(Até 6 dígitos)");
+                                id_sindicato = input.nextInt();
+                                if(buscarFuncionarioSindicato(id_sindicato,qt_funcionario,employee)==-1)
+                                {
+                                    aux=0;
+                                    employee[indice].setId_sindicato(id_sindicato);
+                                }
+                                else
+                                {
+                                    System.out.println("O ID já está em uso;")
+                                }
+
+                            }
+                            System.out.printf("--> Seu novo ID do sindicato é : %d",employee[indice].getId_sindicato());
+
+                            break;
+                        case 7:
+                            System.out.println("Digite o novo valor a ser cobrado pela taxa sindical");
+                            taxa_sindicato = input.nextDouble();
+
+                            employee[indice].setTaxa_sindical(taxa_sindicato);
+
+                            System.out.println("Sua taxa sindical foi alterada com sucesso");
+                            break;
+                        case 0:
                             break;
 
                     }
-
-
-
+                    break;
+                case 7:
+                    // folha de pagamento
+                    break;
+                case 8:
+                    //undo/redo
+                    break;
+                case 9:
 
                     break;
 
