@@ -289,6 +289,96 @@ public class Main {
                     System.out.println("7. Taxa Sindical");
                     System.out.println("0. Cancelar");
 
+                    command_dados = input.nextInt();
+                    aux=0;
+                    switch(command_dados)
+                    {
+                        case 1:
+                            while(aux==0) {
+                                input.nextLine();
+                                System.out.println("Digite o novo nome do funcionário");
+                                name = input.nextLine();
+
+                                System.out.println("Deseja alterar o nome do funcionário para : ");
+                                System.out.printf(" --> %s\n", name);
+                                System.out.println("0 --> Não");
+                                System.out.println("1 --> Sim");
+                                aux = input.nextInt();
+                            }
+                            employee[indice].setName(name);
+                            System.out.println("Nome do funcionário alterado com sucesso");
+                            break;
+                        case 2:
+                            while(aux==0)
+                            {
+                                input.nextLine();
+                                System.out.println("Digite o novo endereço do funcionário");
+                                adress= input.nextLine();
+
+                                System.out.println("Deseja alterar o endereço do funcionário para : ");
+                                System.out.printf(" --> %s\n", adress);
+                                System.out.println("0 --> Não");
+                                System.out.println("1 --> Sim");
+                                aux = input.nextInt();
+                            }
+                            employee[indice].setAdress(adress);
+                            System.out.println("Endereço alterado com sucesso");
+                            break;
+                        case 3:
+                            while(aux==0)
+                            {
+                                input.nextLine();
+                                System.out.println("Digite o novo tipo do funcionário");
+                                System.out.println("1 -> Horista");
+                                System.out.println("2 -> Salariado");
+                                System.out.println("3 -> Comissionado");
+                                type = input.nextInt();
+
+                                if(type==1)
+                                    System.out.println("Deseja alterar o endereço do funcionário para : 'HORISTA' ?");
+                                else if(type==2)
+                                    System.out.println("Deseja alterar o endereço do funcionário para : 'SALARIADO' ?");
+                                else if(type==3)
+                                    System.out.println("Deseja alterar o endereço do funcionário para : 'COMISSIONADO' ?");
+
+                                System.out.println("0 --> Não");
+                                System.out.println("1 --> Sim");
+                                aux = input.nextInt();
+                            }
+                            employee[indice].setType(type);
+                            System.out.println("Tipo alterado com sucesso");
+                            break;
+                        case 4:
+                            while(aux==0)
+                            {
+                                input.nextLine();
+                                System.out.println("Digite o novo tipo do funcionário");
+                                System.out.println("1 -> Cheque pelos correios");
+                                System.out.println("2 -> Em mãos");
+                                System.out.println("3 -> Depósito bancário");
+                                type = input.nextInt();
+
+                                if(type==1)
+                                    System.out.println("Deseja alterar o endereço do funcionário para : 'CHEQUE PELOS CORREIOS' ?");
+                                else if(type==2)
+                                    System.out.println("Deseja alterar o endereço do funcionário para : 'EM MÃOS' ?");
+                                else if(type==3)
+                                    System.out.println("Deseja alterar o endereço do funcionário para : 'DEPÓSITO BANCÁRIO' ?");
+
+                                System.out.println("0 --> Não");
+                                System.out.println("1 --> Sim");
+                                aux = input.nextInt();
+                            }
+                            employee[indice].setType(type);
+                            System.out.println("Tipo alterado com sucesso");
+
+                            break;
+                        case 5:
+
+                            break;
+
+                    }
+
 
 
 
