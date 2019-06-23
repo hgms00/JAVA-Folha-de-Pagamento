@@ -1,13 +1,11 @@
 public class Funcionario {
 
-    private static String name;
-    private static String adress;
+    private static String[] name;
+    private static String[] adress;
     private static int ID;
     private static int metodo_de_pagamento;
-
     private static int type;
     private static boolean existe = false;
-
     private static int tipo_receber;
     /*tipo_receber
     1 -> semanalmente
@@ -27,6 +25,9 @@ public class Funcionario {
     //semanal
     private static int a_cada_semana;
     private static int semanal_dia_receber;
+
+    //Agenda de pagamento
+    private static int tipo_da_agenda;
 
 
     //sindicato
@@ -114,44 +115,27 @@ public class Funcionario {
         Funcionario.sindicato = sindicato;
     }
 
-    public static void setPayment(int type)
-    {
-        if(type==1)
-        {
-            tipo_receber = 1;
-            a_cada_semana = 1;
-            semanal_dia_receber = 5;
-            mensal_data_receber=-1;
-        }
-        else if(type==2)
-        {
-            tipo_receber=2;
-            mensal_data_receber=30;
-            a_cada_semana=-1;
-            semanal_dia_receber=-1;
-        }
-        else if(type==3)
-        {
-            tipo_receber=3;
-            mensal_data_receber=-1;
-            a_cada_semana=2;
-            semanal_dia_receber=5;
-        }
+    public static int getTipo_da_agenda() {
+        return tipo_da_agenda;
     }
 
-    public static String getName() {
+    public static void setTipo_da_agenda(int tipo_da_agenda) {
+        Funcionario.tipo_da_agenda = tipo_da_agenda;
+    }
+
+    public static String[] getName() {
         return name;
     }
 
-    public static void setName(String name) {
+    public static void setName(String[] name) {
         Funcionario.name = name;
     }
 
-    public static String getAdress() {
+    public static String[] getAdress() {
         return adress;
     }
 
-    public static void setAdress(String adress) {
+    public static void setAdress(String[] adress) {
         Funcionario.adress = adress;
     }
 
@@ -178,4 +162,5 @@ public class Funcionario {
     public static void setExiste(boolean existe) {
         Funcionario.existe = existe;
     }
+
 }
