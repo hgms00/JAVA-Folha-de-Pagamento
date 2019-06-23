@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.math.*;
+import java.util.*;
+import java.lang.*;
 
 public class Main {
 
@@ -21,7 +24,7 @@ public class Main {
         }
         return -1;
     }
-    public static int buscarFuncionarioSindicato(int id,int qt_funcionario,Funcionario[] employee)
+    private static int buscarFuncionarioSindicato(int id,int qt_funcionario,Funcionario[] employee)
     {
         int i;
         for(i=1;i<=qt_funcionario;i++)
@@ -34,14 +37,108 @@ public class Main {
         return -1;
 
     }
+
+    private static void setAgendasDefault(Agendas_de_Pagamento[] agendas)
+    {
+        String aux;
+
+        //---------1
+
+        agendas[1].setName("semanalmente");
+        agendas[1].setType(2);
+        agendas[1].setA_cada_semana(2);
+        agendas[1].setDia_da_semana(5);
+        agendas[1].setDia_de_pagamento(-1);
+        //---------2
+        agendas[2].setName("mensalmente");
+        agendas[2].setType(1);
+        agendas[2].setA_cada_semana(-1);
+        agendas[2].setDia_da_semana(-1);
+        agendas[2].setDia_de_pagamento(30);
+        //---------3
+        agendas[3].setName("bi-semanalmente");
+        agendas[3].setType(2);
+        agendas[3].setA_cada_semana(2);
+        agendas[3].setDia_da_semana(5);
+        agendas[3].setDia_de_pagamento(-1);
+        //----------------
+    }
+    private static int charToInt(char c) {
+        if (c == '0')
+            return 0;
+        if (c == '1')
+            return 1;
+        if (c == '2')
+            return 2;
+        if (c == '3')
+            return 3;
+        if (c == '4')
+            return 4;
+        if (c == '5')
+            return 5;
+        if (c == '6')
+            return 6;
+        if (c == '7')
+            return 7;
+        if (c == '8')
+            return 8;
+        if (c == '9')
+            return 9;
+
+        return 0;
+    }
+
+    private static int stringToInt(String[] numero)
+    {
+       int i;
+       int numero_int = 0;
+       char aux_c;
+       for(i=0;i<numero.length;i++)
+       {
+
+           numero_int += (charToInt(numero[i])*Math.pow(10,numero.length-1-i));
+       }
+       return numero_int;
+    }
+
+
+    private static void setAgendas(Agendas_de_Pagamento[] agendas, String[] name,int qt_agendas)
+    {
+        int i;
+        int j=0;
+        String[] numero ;
+        agendas[qt_agendas].setName(name);
+
+        if (equals(name[0],'s'))
+        {
+            agendas[qt_agendas].setType(2);
+            agendas[qt_agendas].setA_cada_semana(charToInt(name[8]));
+
+
+        }
+        else
+        {
+            agendas[qt_agendas].setType(1);
+
+            for(i=6; i<name.length() ; i++)
+            {
+                numero[j]=name[i];
+                j++;
+            }
+            agendas[qt_agendas].setDia_de_pagamento(stringToInt(numero));
+        }
+    }
     public static void main(String[] args)
     {
         Funcionario employee[] = new Funcionario[1000];
+        Agendas_de_Pagamento agendas[] = new Agendas_de_Pagamento[1000];
+        int qt_agendas = 3;
+
         int command = 1;
-        String name;
-        String adress;
+        String name = null;
+        String adress = null;
         double salary;
-        int type;
+        int type = 0;
         int id;
         int qt_funcionario = 0;
         int id_sindicato;
@@ -55,7 +152,7 @@ public class Main {
 
         int aux;
 
-
+        setAgendasDefault(agendas);
 
         while(command!=0)
         {
@@ -121,7 +218,18 @@ public class Main {
 
 
                     //Setando o pagamento e a existência
-                    employee[qt_funcionario].setPayment(type);
+                    if(type==1)
+                    {
+                        employee[qt_funcionario].setTipo_da_agenda(1);
+                    }
+                    else if(type==2)
+                    {
+                        employee[qt_funcionario].setTipo_da_agenda(2);
+                    }
+                    else if(type==3)
+                    {
+                        employee[qt_funcionario].setTipo_da_agenda(3);
+                    }
                     employee[qt_funcionario].setExiste(true);
 
 
@@ -326,7 +434,7 @@ public class Main {
                             {
                                 input.nextLine();
                                 System.out.println("Digite o novo endereço do funcionário");
-                                adress= input.nextLine();
+                                adress = input.nextLine();
 
                                 System.out.println("Deseja alterar o endereço do funcionário para : ");
                                 System.out.printf(" --> %s\n", adress);
@@ -424,7 +532,7 @@ public class Main {
                                 }
                                 else
                                 {
-                                    System.out.println("O ID já está em uso;")
+                                    System.out.println("O ID já está em uso;");
                                 }
 
                             }
@@ -451,6 +559,19 @@ public class Main {
                     //undo/redo
                     break;
                 case 9:
+
+                    break;
+                case 10:
+                    qt_agendas++;
+                    input.nextLine();
+                    System.out.println("Digite o tipo de agenda a ser adicionada");
+
+                    name = input.nextLine();
+
+                    setAgendas(agendas,name,qt_agendas);
+
+                    System.out.println("Agenda adicionada como sucesso");
+
 
                     break;
 
