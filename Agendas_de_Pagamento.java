@@ -1,6 +1,6 @@
 public class Agendas_de_Pagamento {
 
-    private static String[] name;
+    private static String name;
 
     private static int type;
 
@@ -16,11 +16,11 @@ public class Agendas_de_Pagamento {
     private static int a_cada_semana;
     private static int dia_da_semana;
 
-    public String[] getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(String[] name) {
+    public void setName(String name) {
         this.name = name;
     }
 
