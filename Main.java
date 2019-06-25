@@ -54,13 +54,16 @@ public class Main {
 
                 if(employee[i] instanceof Comissionado)
                 {
-                    System.out.println("---> Valor obtido a partir de comissão em vendas %.2lf",((Comissionado)employee[i]).getComissao();
+                    System.out.printf("---> Valor obtido a partir de comissão em vendas %.2lf\n",((Comissionado)employee[i]).getComissao());
                     double salary = ((Comissionado) employee[i]).getSalary() + ((Comissionado)employee[i]).getComissao() - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
                     System.out.printf("Salário total recebido : %lf",salary);
                 }
-                else if ()
-                
-                
+                else if (employee[i] instanceof Horista)
+                {
+                    System.out.println("");
+                }
+
+
 
                 if(employee[i].getMetodo_de_pagamento()==1)
                     System.out.println("Pagamento realizado pelo método : Cheque pelos Correios");
@@ -100,6 +103,7 @@ public class Main {
         //----------------
     }
     private static int charToInt(char c) {
+
         if (c == '0')
             return 0;
         if (c == '1')
@@ -298,8 +302,14 @@ public class Main {
                     if(employee[qt_funcionario] instanceof Salariado)
                     {
                         System.out.println("Digite o salário do funcionário");
-                        salary = input.nextDouble();
-                        ((Salariado) employee[qt_funcionario]).setSalary(salary);
+                        try{
+                            salary = input.nextDouble();
+                            ((Salariado) employee[qt_funcionario]).setSalary(salary);
+
+                        }catch (Exception e){
+                            System.err.println(e);
+                        }
+
                     }
                     else if(employee[qt_funcionario] instanceof Comissionado)
                     {
