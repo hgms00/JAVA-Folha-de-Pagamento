@@ -31,10 +31,10 @@ public class Funcionario {
 
 
     //sindicato
-    private static boolean sindicato;
-    private static double taxa_sindical;
-    private static int id_sindicato;
-    private static double taxa_servico;
+    private static boolean sindicato = false;
+    private static double taxa_sindical = 0;
+    private static int id_sindicato = 0;
+    private static double taxa_servico = 0;
 
     //ponto
     private static int hora_entrada;
