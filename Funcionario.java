@@ -1,7 +1,7 @@
 public class Funcionario {
 
-    private static String[] name;
-    private static String[] adress;
+    private static String name;
+    private static String adress;
     private static int ID;
     private static int metodo_de_pagamento;
     private static int type;
@@ -123,19 +123,19 @@ public class Funcionario {
         Funcionario.tipo_da_agenda = tipo_da_agenda;
     }
 
-    public static String[] getName() {
+    public static String getName() {
         return name;
     }
 
-    public static void setName(String[] name) {
+    public void setName(String name) {
         Funcionario.name = name;
     }
 
-    public static String[] getAdress() {
+    public String getAdress() {
         return adress;
     }
 
-    public static void setAdress(String[] adress) {
+    public static void setAdress(String adress) {
         Funcionario.adress = adress;
     }
 
