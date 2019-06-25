@@ -88,47 +88,69 @@ public class Main {
         return 0;
     }
 
-    private static int stringToInt(String[] numero)
+    private static int stringToInt(String numero)
     {
        int i;
        int numero_int = 0;
        char aux_c;
-       for(i=0;i<numero.length;i++)
+       for(i=0;i<numero.length();i++)
        {
 
-           numero_int += (charToInt(numero[i])*Math.pow(10,numero.length-1-i));
+           numero_int += (charToInt(numero.charAt(i))*Math.pow(10,numero.length()-1-i));
        }
        return numero_int;
     }
 
 
-    private static void setAgendas(Agendas_de_Pagamento[] agendas, String[] name,int qt_agendas)
+    private void setAgendas(Agendas_de_Pagamento[] agendas, String name, int qt_agendas)
     {
         int i;
-        int j=0;
-        String[] numero ;
+        String numero = null;
         agendas[qt_agendas].setName(name);
 
-        if (equals(name[0],'s'))
+        if (name.equals("semanal"))
         {
             agendas[qt_agendas].setType(2);
-            agendas[qt_agendas].setA_cada_semana(charToInt(name[8]));
+            agendas[qt_agendas].setA_cada_semana(charToInt(name.charAt(8)));
 
-
+            if(name.substring(10).equals("domingo"))
+            {
+                agendas[qt_agendas].setDia_da_semana(0);
+            }
+            else if(name.substring(10).equals("segunda"))
+            {
+                agendas[qt_agendas].setDia_da_semana(1);
+            }
+            else if(name.substring(10).equals("terça"))
+            {
+                agendas[qt_agendas].setDia_da_semana(2);
+            }
+            else if(name.substring(10).equals("quarta"))
+            {
+                agendas[qt_agendas].setDia_da_semana(3);
+            }
+            else if(name.substring(10).equals("quinta"))
+            {
+                agendas[qt_agendas].setDia_da_semana(4);
+            }
+            else if(name.substring(10).equals("sexta"))
+            {
+                agendas[qt_agendas].setDia_da_semana(5);
+            }
+            else if(name.substring(10).equals("sabado"))
+            {
+                agendas[qt_agendas].setDia_da_semana(6);
+            }
         }
         else
         {
             agendas[qt_agendas].setType(1);
-
-            for(i=6; i<name.length() ; i++)
-            {
-                numero[j]=name[i];
-                j++;
-            }
+            numero = name.substring(6);
             agendas[qt_agendas].setDia_de_pagamento(stringToInt(numero));
         }
     }
-    public static void main(String[] args)
+
+    public void main(String[] args)
     {
         Funcionario employee[] = new Funcionario[1000];
         Agendas_de_Pagamento agendas[] = new Agendas_de_Pagamento[1000];
@@ -144,6 +166,7 @@ public class Main {
         int id_sindicato;
         int sindicato;
         int indice;
+        int horas_passadas=0;
         float percentual;
         int payment_type;
         double taxa_sindicato;
@@ -156,6 +179,7 @@ public class Main {
 
         while(command!=0)
         {
+            System.out.printf("----> Horário Atual : %d:00\n",hora);
             System.out.println("O que você deseja fazer?\n");
             System.out.println("1. Adicionar um novo funcionário");
             System.out.println("2. Remover um funcionário existente");
@@ -554,11 +578,36 @@ public class Main {
                     break;
                 case 7:
                     // folha de pagamento
+                    for(aux=1;aux<=qt_funcionario;aux++)
+                    {
+                        employee[aux].
+                    }
+
                     break;
                 case 8:
                     //undo/redo
                     break;
                 case 9:
+                    System.out.println("Digite o ID do funcionário que terá a agenda de pagamento modificada");
+                    id = input.nextInt();
+                    indice = buscarFuncionario(id,qt_funcionario,employee);
+                    if(indice==-1 || employee[indice].isExiste()==false)
+                    {
+                        System.out.println("O funcionário não existe");
+                        break;
+                    }
+
+
+                    System.out.println("SELECIONE UMA DAS AGENDAS DE PAGAMENTOS DISPONÍVEIS\n");
+                    for(aux=1;aux<=qt_agendas;aux++)
+                    {
+                        System.out.printf("%d --> %s",aux,agendas[aux].getName());
+                    }
+                    aux = input.nextInt();
+                    employee[indice].setTipo_da_agenda(aux);
+
+                    System.out.println("Agenda de pagamento alterada com sucesso");
+
 
                     break;
                 case 10:
@@ -574,9 +623,17 @@ public class Main {
 
 
                     break;
+                case 11:
+                    System.out.println("Digite quantas horas você quer passar (Digite 8 para passar um turno de trabalho) : ");
+                    horas_passadas=input.nextInt();
 
+                    hora+=horas_passadas;
+
+                    horas_passadas =0;
+
+                    System.out.printf("----> Horário Atual : %d:00\n",hora);
+                    break;
             }
-
         }
     }
 
