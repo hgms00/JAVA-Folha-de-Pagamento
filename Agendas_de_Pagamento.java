@@ -55,4 +55,5 @@ public class Agendas_de_Pagamento {
     public void setDia_da_semana(int dia_da_semana) {
         this.dia_da_semana = dia_da_semana;
     }
+
 }
