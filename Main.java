@@ -38,6 +38,42 @@ public class Main {
 
     }
 
+    private static void rodarFolhadePagamento(int i,Agendas_de_Pagamento[] agendas,Funcionario[] employee,int dia,int mes)
+    {
+        int type_agenda = employee[i].getTipo_da_agenda();
+
+        if(agendas[type_agenda].getType()==1)
+        {
+            if(agendas[type_agenda].getDia_de_pagamento()==dia)
+            {
+                System.out.println("================CONTRA-CHEQUE======================");
+                System.out.printf("Referente ao funcionário %s",employee[i].getName());
+
+                System.out.printf(" ---> Valor descontado pelo sindicato %.2lf",employee[i].getTaxa_sindical());
+                System.out.printf(" ---> Valor descontado por taxa de serviços %.2lf",employee[i].getTaxa_servico());
+
+                if(employee[i] instanceof Comissionado)
+                {
+                    System.out.println("---> Valor obtido a partir de comissão em vendas %.2lf",((Comissionado)employee[i]).getComissao();
+                    double salary = ((Comissionado) employee[i]).getSalary() + ((Comissionado)employee[i]).getComissao() - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
+                    System.out.printf("Salário total recebido : %lf",salary);
+                }
+                else if ()
+                
+                
+
+                if(employee[i].getMetodo_de_pagamento()==1)
+                    System.out.println("Pagamento realizado pelo método : Cheque pelos Correios");
+                else if(employee[i].getMetodo_de_pagamento()==2)
+                    System.out.println("Pagamento realizado pelo método : Em mãos");
+                else if (employee[i].getMetodo_de_pagamento()==3)
+                    System.out.println("Pagamento realizado pelo método : Depósito bancário");
+            }
+            else
+                return;
+        }
+    }
+
     private static void setAgendasDefault(Agendas_de_Pagamento[] agendas)
     {
         String aux;
@@ -90,15 +126,15 @@ public class Main {
 
     private static int stringToInt(String numero)
     {
-       int i;
-       int numero_int = 0;
-       char aux_c;
-       for(i=0;i<numero.length();i++)
-       {
+        int i;
+        int numero_int = 0;
+        char aux_c;
+        for(i=0;i<numero.length();i++)
+        {
 
-           numero_int += (charToInt(numero.charAt(i))*Math.pow(10,numero.length()-1-i));
-       }
-       return numero_int;
+            numero_int += (charToInt(numero.charAt(i))*Math.pow(10,numero.length()-1-i));
+        }
+        return numero_int;
     }
 
 
@@ -519,28 +555,28 @@ public class Main {
 
                             break;
                         case 5:
-                                input.nextLine();
-                                System.out.println("O funcionário pertence ao sindicato?");
-                                System.out.println("0 --> Não");
-                                System.out.println("1 --> Sim");
-                                sindicato = input.nextInt();
-                                if(sindicato==1)
-                                {
-                                    employee[indice].setSindicato(true);
-                                    System.out.println("Digite a taxa mensal do sindicato");
-                                    taxa_sindicato = input.nextDouble();
-                                    employee[qt_funcionario].setTaxa_sindical(taxa_sindicato);
+                            input.nextLine();
+                            System.out.println("O funcionário pertence ao sindicato?");
+                            System.out.println("0 --> Não");
+                            System.out.println("1 --> Sim");
+                            sindicato = input.nextInt();
+                            if(sindicato==1)
+                            {
+                                employee[indice].setSindicato(true);
+                                System.out.println("Digite a taxa mensal do sindicato");
+                                taxa_sindicato = input.nextDouble();
+                                employee[qt_funcionario].setTaxa_sindical(taxa_sindicato);
 
 
-                                    id_sindicato = (1000) + qt_funcionario;
-                                    employee[qt_funcionario].setId_sindicato(id_sindicato);
-                                    System.out.printf("--> O ID do sindicato do funcionário é : %d\n",id_sindicato);
-                                }
-                                else
-                                {
-                                    employee[indice].setSindicato(false);
+                                id_sindicato = (1000) + qt_funcionario;
+                                employee[qt_funcionario].setId_sindicato(id_sindicato);
+                                System.out.printf("--> O ID do sindicato do funcionário é : %d\n",id_sindicato);
+                            }
+                            else
+                            {
+                                employee[indice].setSindicato(false);
 
-                                }
+                            }
                             break;
                         case 6:
                             aux=1;
@@ -580,7 +616,7 @@ public class Main {
                     // folha de pagamento
                     for(aux=1;aux<=qt_funcionario;aux++)
                     {
-                        employee[aux].
+                        rodarFolhadePagamento(aux,agendas,employee,dia,mes);
                     }
 
                     break;
