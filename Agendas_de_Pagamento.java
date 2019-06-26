@@ -21,7 +21,7 @@ public class Agendas_de_Pagamento {
     }
 
     public static void setName(String name) {
-        Agendas_de_Pagamento.name = name;
+        this.name = name;
     }
 
     public static int getType() {
@@ -29,7 +29,7 @@ public class Agendas_de_Pagamento {
     }
 
     public static void setType(int type) {
-        Agendas_de_Pagamento.type = type;
+        this.type = type;
     }
 
     public static int getDia_de_pagamento() {
@@ -37,7 +37,7 @@ public class Agendas_de_Pagamento {
     }
 
     public static void setDia_de_pagamento(int dia_de_pagamento) {
-        Agendas_de_Pagamento.dia_de_pagamento = dia_de_pagamento;
+        this.dia_de_pagamento = dia_de_pagamento;
     }
 
     public static int getA_cada_semana() {
@@ -45,7 +45,7 @@ public class Agendas_de_Pagamento {
     }
 
     public static void setA_cada_semana(int a_cada_semana) {
-        Agendas_de_Pagamento.a_cada_semana = a_cada_semana;
+        this.a_cada_semana = a_cada_semana;
     }
 
     public static int getDia_da_semana() {
@@ -53,7 +53,7 @@ public class Agendas_de_Pagamento {
     }
 
     public static void setDia_da_semana(int dia_da_semana) {
-        Agendas_de_Pagamento.dia_da_semana = dia_da_semana;
+        this.dia_da_semana = dia_da_semana;
     }
 
 }
