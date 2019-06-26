@@ -1,3 +1,4 @@
+
 public class Salariado extends Funcionario {
 
     private static double salary;
