@@ -5,6 +5,10 @@ public class Comissionado extends Funcionario {
     private static double[] valor_venda = new double[31];
     private static double comissao = 0;
 
+    public static void setComissao() {
+        Comissionado.comissao = 0;
+    }
+
     public static float getPercentual() {
         return percentual;
     }
