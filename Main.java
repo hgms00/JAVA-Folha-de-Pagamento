@@ -754,7 +754,6 @@ public class Main {
                     break;
                 case 10:
                     qt_agendas++;
-                    input.nextLine();
                     System.out.println("Digite o tipo de agenda a ser adicionada");
 
                     name = input.nextLine();
