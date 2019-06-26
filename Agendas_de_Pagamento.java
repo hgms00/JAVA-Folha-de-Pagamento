@@ -1,8 +1,8 @@
 public class Agendas_de_Pagamento {
 
-    private static String name;
+    private String name;
 
-    private static int type;
+    private int type;
 
     /* TYPE
     1 -> Mensais
@@ -10,49 +10,49 @@ public class Agendas_de_Pagamento {
      */
 
     //Configurações para mensal
-    private static int dia_de_pagamento;
+    private int dia_de_pagamento;
 
     //Configurações para semanal
-    private static int a_cada_semana;
-    private static int dia_da_semana;
+    private int a_cada_semana;
+    private int dia_da_semana;
 
-    public static String getName() {
-        return name;
+    public String getName() {
+        return this.name;
     }
 
-    public static void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public static int getType() {
+    public int getType() {
         return type;
     }
 
-    public static void setType(int type) {
+    public void setType(int type) {
         this.type = type;
     }
 
-    public static int getDia_de_pagamento() {
+    public int getDia_de_pagamento() {
         return dia_de_pagamento;
     }
 
-    public static void setDia_de_pagamento(int dia_de_pagamento) {
+    public void setDia_de_pagamento(int dia_de_pagamento) {
         this.dia_de_pagamento = dia_de_pagamento;
     }
 
-    public static int getA_cada_semana() {
+    public int getA_cada_semana() {
         return a_cada_semana;
     }
 
-    public static void setA_cada_semana(int a_cada_semana) {
+    public void setA_cada_semana(int a_cada_semana) {
         this.a_cada_semana = a_cada_semana;
     }
 
-    public static int getDia_da_semana() {
+    public int getDia_da_semana() {
         return dia_da_semana;
     }
 
-    public static void setDia_da_semana(int dia_da_semana) {
+    public void setDia_da_semana(int dia_da_semana) {
         this.dia_da_semana = dia_da_semana;
     }
 
