@@ -1,14 +1,13 @@
 import java.util.Scanner;
-import java.math.*;
-import java.util.*;
 import java.lang.*;
 
 public class Main {
 
-    private static int dia=26;
+    private static int dia=14;
     private static int mes=06;
     private static int hora=7;
     private static int ano=2019;
+    private static int dia_da_semana = 5;
 
 
     private static int buscarFuncionario(int id,int qt_funcionario,Funcionario[] employee)
@@ -24,6 +23,16 @@ public class Main {
         }
         return -1;
     }
+
+    private static void lastPayment(Funcionario[] employee, int qt_funcionario, int dias_passados)
+    {
+        int i;
+        for(i=1;i<=qt_funcionario;i++)
+        {
+            employee[i].setDias_sem_receber(dias_passados);
+        }
+    }
+
     private static int buscarFuncionarioSindicato(int id,int qt_funcionario,Funcionario[] employee)
     {
         int i;
@@ -38,63 +47,126 @@ public class Main {
 
     }
 
-    private static void rodarFolhadePagamento(int i,Agendas_de_Pagamento[] agendas,Funcionario[] employee,int dia,int mes)
+    private static void rodarFolhadePagamento(int i,Agendas_de_Pagamento[] agendas,Funcionario[] employee,int dia_atual,int mes,int dia_semana_atual)
     {
         int type_agenda = employee[i].getTipo_da_agenda();
+        System.out.printf("TIPO DA AGENDA DO FUNCIONARIO %d",type_agenda);
 
         if(agendas[type_agenda].getType()==1)
         {
-            if(agendas[type_agenda].getDia_de_pagamento()==dia)
+            if(agendas[type_agenda].getDia_de_pagamento()==dia_atual || (dia_atual==28 && dia_semana_atual==5) || (dia_atual==29 && dia_semana_atual==5) )
             {
+                employee[i].zerarDias_sem_receber();
                 System.out.println("================CONTRA-CHEQUE======================");
-                System.out.printf("Referente ao funcionário %s",employee[i].getName());
+                System.out.printf("Referente ao funcionário %s\n",employee[i].getName());
 
-                System.out.printf(" ---> Valor descontado pelo sindicato %.2lf",employee[i].getTaxa_sindical());
-                System.out.printf(" ---> Valor descontado por taxa de serviços %.2lf",employee[i].getTaxa_servico());
+                System.out.printf(" ---> Valor descontado pelo sindicato %.2f\n",employee[i].getTaxa_sindical());
+                System.out.printf(" ---> Valor descontado por taxa de serviços %.2f\n",employee[i].getTaxa_servico());
 
                 if(employee[i] instanceof Comissionado)
                 {
-                    System.out.printf("---> Valor obtido a partir de comissão em vendas %.2lf\n",((Comissionado)employee[i]).getComissao());
+                    System.out.printf("---> Valor obtido a partir de comissão em vendas %.2f\n",((Comissionado)employee[i]).getComissao());
                     double salary = ((Comissionado) employee[i]).getSalary() + ((Comissionado)employee[i]).getComissao() - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
-                    System.out.printf("Salário total recebido : %lf",salary);
+                    System.out.printf("Salário total recebido : %.2f\n",salary);
+                    ((Comissionado)employee[i]).setComissao();
                 }
                 else if (employee[i] instanceof Horista)
                 {
-                    System.out.println("");
+                    double salary =((Horista)employee[i]).getSalary_semanal() - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
+                    System.out.printf("Salário total recebido : %.2f\n",salary);
+                    ((Horista)employee[i]).setSalary_semanal();
                 }
-
-
-
+                else if (employee[i] instanceof Salariado)
+                {
+                    double salary = ((Salariado)employee[i]).getSalary() - - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
+                    System.out.printf("Salário total recebido : %.2f\n",salary);
+                }
                 if(employee[i].getMetodo_de_pagamento()==1)
                     System.out.println("Pagamento realizado pelo método : Cheque pelos Correios");
                 else if(employee[i].getMetodo_de_pagamento()==2)
                     System.out.println("Pagamento realizado pelo método : Em mãos");
                 else if (employee[i].getMetodo_de_pagamento()==3)
                     System.out.println("Pagamento realizado pelo método : Depósito bancário");
+
+                System.out.println("===================================================");
             }
             else
                 return;
+        }
+        else if(agendas[type_agenda].getType()==2)
+        {
+            if(agendas[type_agenda].getDia_da_semana()==dia_semana_atual)
+            {
+                System.out.printf("DIAS SEM RECEBER ---> %d\n",employee[i].getDias_sem_receber());
+                System.out.printf("a cada semana --> %d\n",agendas[0].getA_cada_semana());
+                System.out.printf("TIPO DA AGENDA --> %d\n",type_agenda);
+                if((agendas[type_agenda].getA_cada_semana()*7)<=employee[i].getDias_sem_receber())
+                {
+                    employee[i].zerarDias_sem_receber();
+                    System.out.println("================CONTRA-CHEQUE======================");
+                    System.out.printf("Referente ao funcionário %s\n",employee[i].getName());
+
+                    System.out.printf(" ---> Valor descontado pelo sindicato %.2f\n",employee[i].getTaxa_sindical());
+                    System.out.printf(" ---> Valor descontado por taxa de serviços %.2f\n",employee[i].getTaxa_servico());
+
+                    if(employee[i] instanceof Comissionado)
+                    {
+                        System.out.printf("---> Valor obtido a partir de comissão em vendas %.2f\n",((Comissionado)employee[i]).getComissao());
+                        double salary = ((Comissionado) employee[i]).getSalary() + ((Comissionado)employee[i]).getComissao() - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
+                        System.out.printf("Salário total recebido : %.2f\n",salary);
+                        ((Comissionado)employee[i]).setComissao();
+                    }
+                    else if (employee[i] instanceof Horista)
+                    {
+                        double salary =((Horista)employee[i]).getSalary_semanal() - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
+                        System.out.printf("Salário total recebido : %.2f\n",salary);
+                        ((Horista)employee[i]).setSalary_semanal();
+                    }
+                    else if (employee[i] instanceof Salariado)
+                    {
+                        double salary = ((Salariado)employee[i]).getSalary() - - employee[i].getTaxa_sindical() - employee[i].getTaxa_servico();
+                        System.out.printf("Salário total recebido : %.2f\n",salary);
+                    }
+                    if(employee[i].getMetodo_de_pagamento()==1)
+                        System.out.println("Pagamento realizado pelo método : Cheque pelos Correios");
+                    else if(employee[i].getMetodo_de_pagamento()==2)
+                        System.out.println("Pagamento realizado pelo método : Em mãos");
+                    else if (employee[i].getMetodo_de_pagamento()==3)
+                        System.out.println("Pagamento realizado pelo método : Depósito bancário");
+
+                    System.out.println("===================================================");
+                }
+                else
+                    return;
+            }
         }
     }
 
     private static void setAgendasDefault(Agendas_de_Pagamento[] agendas)
     {
         String aux;
-
+        //-----NULL
+        agendas[0]= new Agendas_de_Pagamento();
+        agendas[0].setType(-1);
+        agendas[0].setA_cada_semana(-1);
+        agendas[0].setDia_da_semana(-1);
+        agendas[0].setDia_de_pagamento(-1);
         //---------1
-
+        agendas[1] = new Agendas_de_Pagamento();
         agendas[1].setName("semanalmente");
         agendas[1].setType(2);
-        agendas[1].setA_cada_semana(2);
+        agendas[1].setA_cada_semana(1);
         agendas[1].setDia_da_semana(5);
         agendas[1].setDia_de_pagamento(-1);
         //---------2
+        agendas[2] = new Agendas_de_Pagamento();
         agendas[2].setName("mensalmente");
         agendas[2].setType(1);
         agendas[2].setA_cada_semana(-1);
         agendas[2].setDia_da_semana(-1);
         agendas[2].setDia_de_pagamento(30);
         //---------3
+        agendas[3] = new Agendas_de_Pagamento();
         agendas[3].setName("bi-semanalmente");
         agendas[3].setType(2);
         agendas[3].setA_cada_semana(2);
@@ -142,10 +214,11 @@ public class Main {
     }
 
 
-    private void setAgendas(Agendas_de_Pagamento[] agendas, String name, int qt_agendas)
+    private static void setAgendas(Agendas_de_Pagamento[] agendas, String name, int qt_agendas)
     {
         int i;
-        String numero = null;
+        String numero ;
+        agendas[qt_agendas]=new Agendas_de_Pagamento();
         agendas[qt_agendas].setName(name);
 
         if (name.equals("semanal"))
@@ -190,7 +263,7 @@ public class Main {
         }
     }
 
-    public void main(String[] args)
+    public static void main(String[] args)
     {
         Funcionario employee[] = new Funcionario[1000];
         Agendas_de_Pagamento agendas[] = new Agendas_de_Pagamento[1000];
@@ -220,6 +293,20 @@ public class Main {
         while(command!=0)
         {
             System.out.printf("----> Horário Atual : %d:00\n",hora);
+            if(dia_da_semana==0)
+                 System.out.printf("Domingo, %d/%d\n",dia,mes);
+            if(dia_da_semana==1)
+                System.out.printf("Segunda, %d/%d\n",dia,mes);
+            if(dia_da_semana==2)
+                System.out.printf("Terça, %d/%d\n",dia,mes);
+            if(dia_da_semana==3)
+                System.out.printf("Quarta, %d/%d\n",dia,mes);
+            if(dia_da_semana==4)
+                System.out.printf("Quinta, %d/%d\n",dia,mes);
+            if(dia_da_semana==5)
+                System.out.printf("Sexta, %d/%d\n",dia,mes);
+            if(dia_da_semana==6)
+                System.out.printf("Sábado, %d/%d\n",dia,mes);
             System.out.println("O que você deseja fazer?\n");
             System.out.println("1. Adicionar um novo funcionário");
             System.out.println("2. Remover um funcionário existente");
@@ -231,6 +318,10 @@ public class Main {
             System.out.println("8. Undo/redo");
             System.out.println("9. Agenda de pagamento");
             System.out.println("10. Criar nova agenda de pagamento");
+            System.out.println("11. Passar horas");
+            System.out.println("12. Passar dia");
+            System.out.println("13. Passar mês");
+            System.out.println("14. Verificar dados de um empregado");
             System.out.println("0. Sair");
 
             Scanner input = new Scanner(System.in);
@@ -285,6 +376,7 @@ public class Main {
                     if(type==1)
                     {
                         employee[qt_funcionario].setTipo_da_agenda(1);
+                        System.out.printf("%d",agendas[1].getDia_da_semana());
                     }
                     else if(type==2)
                     {
@@ -414,6 +506,8 @@ public class Main {
                         if(employee[indice] instanceof Horista)
                         {
                             ((Horista) employee[indice]).setHoras_diarias(((employee[indice].getHora_saida()-(employee[indice].getHora_entrada()))));
+                            employee[indice].setHora_entrada(0);
+                            employee[indice].setHora_saida(0);
                         }
 
                         System.out.println("Ponto de saída computado com sucesso");
@@ -624,9 +718,11 @@ public class Main {
                     break;
                 case 7:
                     // folha de pagamento
+                    //System.out.printf("--> DIA DA SEMANA : %d",agendas[1].getDia_da_semana());
                     for(aux=1;aux<=qt_funcionario;aux++)
                     {
-                        rodarFolhadePagamento(aux,agendas,employee,dia,mes);
+                        if(employee[aux].isExiste()==true)
+                             rodarFolhadePagamento(aux,agendas,employee,dia,mes,dia_da_semana);
                     }
 
                     break;
@@ -671,14 +767,94 @@ public class Main {
                     break;
                 case 11:
                     System.out.println("Digite quantas horas você quer passar (Digite 8 para passar um turno de trabalho) : ");
+                    System.out.println("---> Não passe mais de 24 horas (utilize a opção 'passar dia') ");
                     horas_passadas=input.nextInt();
 
                     hora+=horas_passadas;
+                    if(hora>24)
+                    {
+                        hora = hora % 24;
+                        dia++;
+                        lastPayment(employee,qt_funcionario,1);
+                        dia_da_semana++;
+                        dia_da_semana = dia_da_semana % 7;
+
+                        if(dia>30)
+                        {
+                            dia = dia % 30;
+                            mes++;
+                            if(mes>12)
+                            {
+                                mes = mes % 12;
+                                ano++;
+                            }
+                        }
+                    }
 
                     horas_passadas =0;
-
                     System.out.printf("----> Horário Atual : %d:00\n",hora);
                     break;
+                case 12:
+                    System.out.println("Digite quantos dias você quer passar");
+                    horas_passadas = input.nextInt();
+
+                    dia+=horas_passadas;
+                    lastPayment(employee,qt_funcionario,horas_passadas);
+                    dia_da_semana+=horas_passadas;
+                    dia_da_semana = dia_da_semana % 7;
+                    if(dia>30)
+                    {
+                        dia = dia % 30;
+                        mes++;
+                        if(mes>12)
+                        {
+                            mes = mes % 12;
+                            ano++;
+                        }
+                    }
+                    horas_passadas=0;
+                    break;
+                case 13:
+                    mes++;
+                    if(mes>12)
+                    {
+                        mes = mes % 12;
+                        ano++;
+                    }
+                    System.out.println("Um mês foi passado");
+                    break;
+                case 14:
+                    System.out.println("Digite o ID do funcionário para visualizar seus dados");
+                    id = input.nextInt();
+                    indice = buscarFuncionario(id,qt_funcionario,employee);
+                    if(indice==-1 || employee[indice].isExiste()==false)
+                    {
+                        System.out.println("O funcionário não existe");
+                        break;
+                    }
+
+                    System.out.printf("NOME : %s\n",employee[indice].getName());
+                    System.out.printf("ENDEREÇO: %s\n",employee[indice].getAdress());
+                    if(employee[indice].getType()==1) {
+                        System.out.printf("TIPO : HORISTA\n");
+                        System.out.printf("SALARIO : %.2f",((Horista)employee[indice]).getSalario_por_hora());
+                    }
+                    if(employee[indice].getType()==2) {
+                        System.out.printf("TIPO : SALARIADO\n");
+                        System.out.printf("SALARIO : %.2f",((Salariado)employee[indice]).getSalary());
+                    }
+                    if(employee[indice].getType()==3) {
+                        System.out.printf("TIPO : COMISSIONADO\n");
+                        System.out.printf("SALARIO : %.2f\n",((Comissionado)employee[indice]).getSalary());
+                    }
+
+                    if(employee[indice].isSindicato()==true)
+                        System.out.printf("PERTENCE AO SINDICATO\n");
+                    else
+                        System.out.printf("NÃO PERTENCE AO SINDICATO\n");
+
+                    break;
+
             }
         }
     }
