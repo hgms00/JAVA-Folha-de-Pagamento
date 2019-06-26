@@ -837,15 +837,24 @@ public class Main {
                     System.out.printf("ENDEREÇO: %s\n",employee[indice].getAdress());
                     if(employee[indice].getType()==1) {
                         System.out.printf("TIPO : HORISTA\n");
+                        if(employee[indice] instanceof Horista)
+                        {
                         System.out.printf("SALARIO : %.2f",((Horista)employee[indice]).getSalario_por_hora());
+                        }
                     }
                     if(employee[indice].getType()==2) {
                         System.out.printf("TIPO : SALARIADO\n");
-                        System.out.printf("SALARIO : %.2f",((Salariado)employee[indice]).getSalary());
+                        if(employee[indice] instanceof Salariado)
+                        {
+                         System.out.printf("SALARIO : %.2f",((Salariado)employee[indice]).getSalary());
+                        }
                     }
-                    if(employee[indice].getType()==3) {
+                    if(employee[indice].getType()==3 ) {
                         System.out.printf("TIPO : COMISSIONADO\n");
+                        if(employee[indice] instanceof Comissionado)
+                        {
                         System.out.printf("SALARIO : %.2f\n",((Comissionado)employee[indice]).getSalary());
+                        }
                     }
 
                     if(employee[indice].isSindicato()==true)
