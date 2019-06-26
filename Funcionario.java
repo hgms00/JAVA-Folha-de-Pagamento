@@ -7,6 +7,7 @@ public class Funcionario {
     private static int type;
     private static boolean existe = false;
     private static int tipo_receber;
+    private static int dias_sem_receber = 0 ;
     /*tipo_receber
     1 -> semanalmente
     2 -> mensalmente
@@ -31,10 +32,10 @@ public class Funcionario {
 
 
     //sindicato
-    private static boolean sindicato = false;
-    private static double taxa_sindical = 0;
-    private static int id_sindicato = 0;
-    private static double taxa_servico = 0;
+    private static boolean sindicato;
+    private static double taxa_sindical;
+    private static int id_sindicato;
+    private static double taxa_servico;
 
     //ponto
     private static int hora_entrada;
@@ -49,6 +50,17 @@ public class Funcionario {
        2 --> salaried
        3 --> commisioned
     */
+
+    public static int getDias_sem_receber() {
+        return dias_sem_receber;
+    }
+
+    public static void setDias_sem_receber(int dias_sem_receber) {
+        Funcionario.dias_sem_receber += dias_sem_receber;
+    }
+    public static void zerarDias_sem_receber() {
+        Funcionario.dias_sem_receber = 0;
+    }
 
     public static double getTaxa_servico() {
         return taxa_servico;
