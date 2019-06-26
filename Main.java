@@ -743,7 +743,7 @@ public class Main {
                     System.out.println("SELECIONE UMA DAS AGENDAS DE PAGAMENTOS DISPONÍVEIS\n");
                     for(aux=1;aux<=qt_agendas;aux++)
                     {
-                        System.out.printf("%d --> %s",aux,agendas[aux].getName());
+                        System.out.printf("%d --> %s\n",aux,agendas[aux].getName());
                     }
                     aux = input.nextInt();
                     employee[indice].setTipo_da_agenda(aux);
