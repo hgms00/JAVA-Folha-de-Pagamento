@@ -8,6 +8,9 @@ public class Main {
     private static int hora=7;
     private static int ano=2019;
     private static int dia_da_semana = 5;
+    private static int undo = 0;
+    private static int redo = 0;
+    private static int i = 0;
 
 
     private static int buscarFuncionario(int id,int qt_funcionario,Funcionario[] employee)
@@ -174,6 +177,7 @@ public class Main {
         agendas[3].setDia_de_pagamento(-1);
         //----------------
     }
+
     private static int charToInt(char c) {
 
         if (c == '0')
@@ -263,10 +267,56 @@ public class Main {
         }
     }
 
+
+
+    private static void backup_do(Funcionario[][] backup,int qt_funcionario,Funcionario[] employee)
+    {
+        for(int i=1;i<=qt_funcionario;i++)
+        {
+            backup[undo][i] = employee[i];
+        }
+        undo++;
+    }
+
+    private static void undo (Funcionario[][] backup, int qt_funcionario,Funcionario[] employee)
+    {
+        if(undo == 1)
+        {
+            System.out.println("Não há mais undos disponíveis");
+            return ;
+        }
+        System.out.println("Undo realizado com sucesso!");
+
+        undo--;
+        redo++;
+        for(i=1;i<=qt_funcionario;i++)
+        {
+            employee[i] = backup[undo][i];
+        }
+    }
+
+    private static void redo (Funcionario[][] backup, int qt_funcionario,Funcionario[] employee)
+    {
+        if(redo==0)
+        {
+            System.out.println("Não há mais redos disponíveis");
+            return ;
+        }
+        System.out.println("Redo realizado com sucesso!");
+        undo++;
+        redo--;
+        for(i=1;i<=qt_funcionario;i++)
+        {
+            employee[i] = backup[undo][i];
+        }
+    }
     public static void main(String[] args)
     {
         Funcionario employee[] = new Funcionario[1000];
         Agendas_de_Pagamento agendas[] = new Agendas_de_Pagamento[1000];
+        Funcionario backup[][] = new Funcionario[100][1000];
+
+
         int qt_agendas = 3;
 
         int command = 1;
@@ -287,14 +337,14 @@ public class Main {
         int command_dados;
 
         int aux;
-
+        backup_do(backup,qt_funcionario,employee);
         setAgendasDefault(agendas);
 
         while(command!=0)
         {
             System.out.printf("----> Horário Atual : %d:00\n",hora);
             if(dia_da_semana==0)
-                 System.out.printf("Domingo, %d/%d\n",dia,mes);
+                System.out.printf("Domingo, %d/%d\n",dia,mes);
             if(dia_da_semana==1)
                 System.out.printf("Segunda, %d/%d\n",dia,mes);
             if(dia_da_semana==2)
@@ -376,7 +426,7 @@ public class Main {
                     if(type==1)
                     {
                         employee[qt_funcionario].setTipo_da_agenda(1);
-                        System.out.printf("%d",agendas[1].getDia_da_semana());
+
                     }
                     else if(type==2)
                     {
@@ -460,6 +510,7 @@ public class Main {
                     employee[qt_funcionario].setID(id);
 
                     System.out.printf("--> O ID de funcionário é : %d\n",id);
+                    backup_do(backup,qt_funcionario,employee);
 
                     break;
                 case 2:
@@ -478,6 +529,7 @@ public class Main {
                         System.out.println("O funcionário foi removido com sucesso");
                         employee[indice].setExiste(false);
                     }
+                    backup_do(backup,qt_funcionario,employee);
 
                     break;
                 case 3:
@@ -512,6 +564,7 @@ public class Main {
 
                         System.out.println("Ponto de saída computado com sucesso");
                     }
+                    backup_do(backup,qt_funcionario,employee);
                     break;
                 case 4:
 
@@ -530,6 +583,7 @@ public class Main {
                     ((Comissionado) employee[indice]).setValor_venda(input.nextDouble(),aux);
 
                     System.out.println("Venda computada com sucesso");
+                    backup_do(backup,qt_funcionario,employee);
 
                     break;
                 case 5:
@@ -552,6 +606,7 @@ public class Main {
                     taxa_servico = input.nextDouble();
 
                     employee[indice].setTaxa_servico(taxa_servico);
+                    backup_do(backup,qt_funcionario,employee);
 
                     break;
                 case 6:
@@ -715,6 +770,7 @@ public class Main {
                             break;
 
                     }
+                    backup_do(backup,qt_funcionario,employee);
                     break;
                 case 7:
                     // folha de pagamento
@@ -722,12 +778,27 @@ public class Main {
                     for(aux=1;aux<=qt_funcionario;aux++)
                     {
                         if(employee[aux].isExiste()==true)
-                             rodarFolhadePagamento(aux,agendas,employee,dia,mes,dia_da_semana);
+                            rodarFolhadePagamento(aux,agendas,employee,dia,mes,dia_da_semana);
                     }
+                    backup_do(backup,qt_funcionario,employee);
 
                     break;
                 case 8:
                     //undo/redo
+                    System.out.println("O que você deseja fazer?");
+                    System.out.println("1 --> UNDO");
+                    System.out.println("2 --> REDO");
+                    aux = input.nextInt();
+
+                    if (aux==1)
+                    {
+                        undo(backup,qt_funcionario,employee);
+                    }
+                    else if (aux==2)
+                    {
+                        redo(backup,qt_funcionario,employee);
+                    }
+
                     break;
                 case 9:
                     System.out.println("Digite o ID do funcionário que terá a agenda de pagamento modificada");
@@ -743,13 +814,12 @@ public class Main {
                     System.out.println("SELECIONE UMA DAS AGENDAS DE PAGAMENTOS DISPONÍVEIS\n");
                     for(aux=1;aux<=qt_agendas;aux++)
                     {
-                        System.out.printf("%d --> %s\n",aux,agendas[aux].getName());
+                        System.out.printf("%d --> %s",aux,agendas[aux].getName());
                     }
                     aux = input.nextInt();
                     employee[indice].setTipo_da_agenda(aux);
 
                     System.out.println("Agenda de pagamento alterada com sucesso");
-
 
                     break;
                 case 10:
@@ -761,7 +831,6 @@ public class Main {
                     setAgendas(agendas,name,qt_agendas);
 
                     System.out.println("Agenda adicionada como sucesso");
-
 
                     break;
                 case 11:
@@ -792,6 +861,7 @@ public class Main {
 
                     horas_passadas =0;
                     System.out.printf("----> Horário Atual : %d:00\n",hora);
+
                     break;
                 case 12:
                     System.out.println("Digite quantos dias você quer passar");
@@ -838,21 +908,21 @@ public class Main {
                         System.out.printf("TIPO : HORISTA\n");
                         if(employee[indice] instanceof Horista)
                         {
-                        System.out.printf("SALARIO : %.2f",((Horista)employee[indice]).getSalario_por_hora());
+                            System.out.printf("SALARIO : %.2f",((Horista)employee[indice]).getSalario_por_hora());
                         }
                     }
                     if(employee[indice].getType()==2) {
                         System.out.printf("TIPO : SALARIADO\n");
                         if(employee[indice] instanceof Salariado)
                         {
-                         System.out.printf("SALARIO : %.2f",((Salariado)employee[indice]).getSalary());
+                            System.out.printf("SALARIO : %.2f",((Salariado)employee[indice]).getSalary());
                         }
                     }
                     if(employee[indice].getType()==3 ) {
                         System.out.printf("TIPO : COMISSIONADO\n");
                         if(employee[indice] instanceof Comissionado)
                         {
-                        System.out.printf("SALARIO : %.2f\n",((Comissionado)employee[indice]).getSalary());
+                            System.out.printf("SALARIO : %.2f\n",((Comissionado)employee[indice]).getSalary());
                         }
                     }
 
