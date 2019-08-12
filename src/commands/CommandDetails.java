@@ -51,7 +51,7 @@ public class CommandDetails implements Command{
                     System.out.printf(" --> %s\n", name);
                     System.out.println("0 --> Não");
                     System.out.println("1 --> Sim");
-                    aux = input.nextInt();
+                    aux = main.TryCatch.booleanintTry();
                 }
                 CommandAdd.getEmployee()[indice].setName(name);
                 System.out.println("Nome do funcionário alterado com sucesso");
@@ -67,7 +67,7 @@ public class CommandDetails implements Command{
                     System.out.printf(" --> %s\n", adress);
                     System.out.println("0 --> Não");
                     System.out.println("1 --> Sim");
-                    aux = input.nextInt();
+                    aux = main.TryCatch.booleanintTry();
                 }
                 CommandAdd.getEmployee()[indice].setAdress(adress);
                 System.out.println("Endereço alterado com sucesso");
@@ -76,11 +76,8 @@ public class CommandDetails implements Command{
                 while(aux==0)
                 {
                     input.nextLine();
-                    System.out.println("Digite o novo tipo do funcionário");
-                    System.out.println("1 -> Horista");
-                    System.out.println("2 -> Salariado");
-                    System.out.println("3 -> Comissionado");
-                    type = input.nextInt();
+                    main.Texts.getDetailsTypeText();
+                    type = main.TryCatch.intTry();
 
                     if(type==1)
                         System.out.println("Deseja alterar o tipo do funcionário para : 'HORISTA' ?");
@@ -91,7 +88,7 @@ public class CommandDetails implements Command{
 
                     System.out.println("0 --> Não");
                     System.out.println("1 --> Sim");
-                    aux = input.nextInt();
+                    aux = main.TryCatch.booleanintTry();
                 }
                 CommandAdd.getEmployee()[indice].setType(type);
                 System.out.println("Tipo alterado com sucesso");
@@ -100,11 +97,8 @@ public class CommandDetails implements Command{
                 while(aux==0)
                 {
                     input.nextLine();
-                    System.out.println("Digite o novo tipo do funcionário");
-                    System.out.println("1 -> Cheque pelos correios");
-                    System.out.println("2 -> Em mãos");
-                    System.out.println("3 -> Depósito bancário");
-                    type = input.nextInt();
+                    main.Texts.getDetailsPaymentText();
+                    type = main.TryCatch.intTry();
 
                     if(type==1)
                         System.out.println("Deseja alterar o endereço do funcionário para : 'CHEQUE PELOS CORREIOS' ?");
@@ -115,7 +109,7 @@ public class CommandDetails implements Command{
 
                     System.out.println("0 --> Não");
                     System.out.println("1 --> Sim");
-                    aux = input.nextInt();
+                    aux = main.TryCatch.booleanintTry();
                 }
                 CommandAdd.getEmployee()[indice].setType(type);
                 System.out.println("Tipo alterado com sucesso");
@@ -126,7 +120,7 @@ public class CommandDetails implements Command{
                 System.out.println("O funcionário pertence ao sindicato?");
                 System.out.println("0 --> Não");
                 System.out.println("1 --> Sim");
-                sindicato = input.nextInt();
+                sindicato = main.TryCatch.booleanintTry();
                 if(sindicato==1)
                 {
                     CommandAdd.getEmployee()[indice].setSindicato(true);
@@ -151,7 +145,7 @@ public class CommandDetails implements Command{
                 while(aux!=0)
                 {
                     System.out.println("Digite seu novo ID do sindicato(Até 6 dígitos)");
-                    id_sindicato = input.nextInt();
+                    id_sindicato = main.TryCatch.anyIntTry();
                     if(buscarFuncionarioSindicato(id_sindicato,CommandAdd.getQt_funcionario(),CommandAdd.getEmployee())==-1)
                     {
                         aux=0;
@@ -168,7 +162,7 @@ public class CommandDetails implements Command{
                 break;
             case 7:
                 System.out.println("Digite o novo valor a ser cobrado pela taxa sindical");
-                taxa_sindicato = input.nextDouble();
+                taxa_sindicato = main.TryCatch.doubleTry();
 
                 CommandAdd.getEmployee()[indice].setTaxa_sindical(taxa_sindicato);
 

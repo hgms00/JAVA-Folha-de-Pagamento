@@ -81,7 +81,7 @@ public class CommandAdd implements Command{
         System.out.println("2 -> Em mãos");
         System.out.println("3 -> Depósito em conta bancária");
 
-        payment_type = input.nextInt();
+        payment_type = main.TryCatch.intTry();
         employee[qt_funcionario].setMetodo_de_pagamento(payment_type);
 
         //-------------SINDICATO---------------------------
@@ -89,7 +89,7 @@ public class CommandAdd implements Command{
         System.out.println("0 --> NÃO");
         System.out.println("1 --> SIM");
 
-        sindicato = input.nextInt();
+        sindicato = main.TryCatch.booleanintTry();
         if(sindicato==1)
             employee[qt_funcionario].setSindicato(true);
         else
@@ -98,7 +98,7 @@ public class CommandAdd implements Command{
         if(sindicato == 1)
         {
             System.out.println("Digite a taxa mensal do sindicato");
-            taxa_sindicato = input.nextDouble();
+            taxa_sindicato = main.TryCatch.doubleTry();
             employee[qt_funcionario].setTaxa_sindical(taxa_sindicato);
 
 

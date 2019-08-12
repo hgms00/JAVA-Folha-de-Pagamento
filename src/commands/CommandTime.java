@@ -18,13 +18,13 @@ public class CommandTime implements Command {
 
         main.Texts.getTimeTexts();
 
-        command = input.nextInt();
+        command = main.TryCatch.intTry();
         input.nextLine();
 
-        if(command==0)
+        if(command==1)
         {
             System.out.println("Digite quantos dias você quer passar:");
-            horas_passadas = input.nextInt();
+            horas_passadas = main.TryCatch.intDayTry();
             input.nextLine();
 
             main.Main.setDia(horas_passadas);
@@ -33,18 +33,18 @@ public class CommandTime implements Command {
 
             horas_passadas=0;
         }
-        else if (command==1)
+        else if (command==2)
         {
             System.out.println("Digite quantas horas você quer passar (Digite 8 para passar um turno de trabalho) : ");
             System.out.println("---> Não passe mais de 24 horas (utilize a opção 'passar dia') ");
-            horas_passadas=input.nextInt();
+            horas_passadas= main.TryCatch.intDayTry();
             input.nextLine();
 
             main.Main.setHora(horas_passadas);
 
             horas_passadas=0;
         }
-        else if (command==2)
+        else if (command==3)
         {
             main.Main.setMes(1);
 

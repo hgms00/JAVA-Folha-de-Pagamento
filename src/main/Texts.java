@@ -39,9 +39,9 @@ public class Texts {
     public static void getTimeTexts()
     {
         System.out.println("O que você deseja avançar?");
-        System.out.println("0 - DIA");
-        System.out.println("1 - HORAS");
-        System.out.println("2 - MÊS");
+        System.out.println("1 - DIA");
+        System.out.println("2 - HORAS");
+        System.out.println("3 - MÊS");
     }
     public static void getDetailsText()
     {
@@ -54,5 +54,21 @@ public class Texts {
         System.out.println("6. Identificação no sindicato");
         System.out.println("7. Taxa Sindical");
         System.out.println("0. Cancelar");
+    }
+
+    public static void getDetailsTypeText()
+    {
+        System.out.println("Digite o novo tipo do funcionário");
+        System.out.println("1 -> Horista");
+        System.out.println("2 -> Salariado");
+        System.out.println("3 -> Comissionado");
+    }
+
+    public static void getDetailsPaymentText()
+    {
+        System.out.println("Digite o novo tipo do funcionário");
+        System.out.println("1 -> Cheque pelos correios");
+        System.out.println("2 -> Em mãos");
+        System.out.println("3 -> Depósito bancário");
     }
 }

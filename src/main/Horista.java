@@ -44,7 +44,7 @@ public class Horista extends FactoryFuncionario implements Manager {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Digite o salário por hora do funcionário");
-        this.salary_semanal = input.nextDouble();
+        this.salary_semanal = main.TryCatch.doubleTry();
     }
 
     public void setSalario_por_hora(double salario_por_hora) {

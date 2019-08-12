@@ -15,7 +15,7 @@ public class CommandSells implements Command {
 
         Scanner input = new Scanner(System.in);
         System.out.println("Digite o ID do funcionário");
-        id = input.nextInt();
+        id = main.TryCatch.anyIntTry();
         indice = buscarFuncionario(id,CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
         if(indice==-1 || CommandAdd.getEmployee()[indice].isExiste()==false)
         {
@@ -24,7 +24,7 @@ public class CommandSells implements Command {
         }
 
         System.out.println("Digite o dia da venda");
-        aux = input.nextInt();
+        aux = main.TryCatch.intDayTry();
         System.out.println("Digite o valor da venda");
         ((main.Comissionado) CommandAdd.getEmployee()[indice]).setValor_venda(input.nextDouble(),aux);
 

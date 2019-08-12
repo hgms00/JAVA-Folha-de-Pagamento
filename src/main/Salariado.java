@@ -2,6 +2,7 @@ package main;
 import commands.CommandAdd;
 
 import java.util.*;
+import main.TryCatch.*;
 
 public class Salariado extends FactoryFuncionario implements Manager {
 
@@ -11,14 +12,8 @@ public class Salariado extends FactoryFuncionario implements Manager {
     }
 
     public void setSalary() {
-        Scanner input = new Scanner(System.in);
-
             System.out.println("Digite o salário do funcionário");
-            try{
-                this.salary = input.nextDouble();
-            }catch (Exception e){
-                System.err.println(e);
-            }
+            this.salary = main.TryCatch.doubleTry();
 
     }
 }

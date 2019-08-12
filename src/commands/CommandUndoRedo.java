@@ -15,7 +15,7 @@ public class CommandUndoRedo implements Command{
         System.out.println("O que você deseja fazer?");
         System.out.println("1 --> UNDO");
         System.out.println("2 --> REDO");
-        aux = input.nextInt();
+        aux = main.TryCatch.undoredoTry();
 
         if (aux==1)
         {

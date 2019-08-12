@@ -16,7 +16,7 @@ public class CommandRemove implements Command {
 
         System.out.println("Digite o ID do funcionário que vocẽ quer remover");
         Scanner input = new Scanner(System.in);
-        id = input.nextInt();
+        id = main.TryCatch.anyIntTry();
 
         indice = buscarFuncionario(id,CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
 

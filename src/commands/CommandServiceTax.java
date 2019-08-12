@@ -15,7 +15,7 @@ public class CommandServiceTax implements Command{
 
         Scanner input = new Scanner(System.in);
         System.out.println("Digite o ID do que será cobrada as taxas de serviços");
-        id = input.nextInt();
+        id = main.TryCatch.anyIntTry();
         indice = buscarFuncionario(id,CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
         if(indice==-1 || CommandAdd.getEmployee()[indice].isExiste()==false)
         {
@@ -30,7 +30,7 @@ public class CommandServiceTax implements Command{
         }
 
         System.out.println("Digite o valor da taxa de serviço a ser descontada");
-        taxa_servico = input.nextDouble();
+        taxa_servico = main.TryCatch.doubleTry();
 
         CommandAdd.getEmployee()[indice].setTaxa_servico(taxa_servico);
         backup_do(main.Main.getBackup(),CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());

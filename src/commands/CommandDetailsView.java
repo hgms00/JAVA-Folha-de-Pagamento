@@ -15,7 +15,7 @@ public class CommandDetailsView implements Command{
         Scanner input = new Scanner(System.in);
 
         System.out.println("Digite o ID do funcionário para visualizar seus dados");
-        id = input.nextInt();
+        id = main.TryCatch.anyIntTry();
         indice = buscarFuncionario(id,CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
         if(indice==-1 || CommandAdd.getEmployee()[indice].isExiste()==false)
         {

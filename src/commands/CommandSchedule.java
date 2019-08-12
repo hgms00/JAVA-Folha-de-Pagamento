@@ -16,7 +16,7 @@ public class CommandSchedule implements Command {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Digite o ID do funcionário que terá a agenda de pagamento modificada");
-        id = input.nextInt();
+        id = main.TryCatch.anyIntTry();
         indice = buscarFuncionario(id,CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
         if(indice==-1 || CommandAdd.getEmployee()[indice].isExiste()==false)
         {
@@ -31,7 +31,7 @@ public class CommandSchedule implements Command {
         {
             System.out.printf("%d --> %s",aux,main.Main.getAgendas()[aux].getName());
         }
-        aux = input.nextInt();
+        aux = main.TryCatch.anyIntTry();
         CommandAdd.getEmployee()[indice].setTipo_da_agenda(aux);
 
         System.out.println("Agenda de pagamento alterada com sucesso");
