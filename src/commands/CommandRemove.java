@@ -3,7 +3,6 @@ package commands;
 import java.util.*;
 import main.Main.*;
 import commands.CommandAdd;
-import static main.Main.backup_do;
 import static main.Main.buscarFuncionario;
 
 
@@ -29,7 +28,5 @@ public class CommandRemove implements Command {
             System.out.println("O funcionário foi removido com sucesso");
             CommandAdd.getEmployee()[indice].setExiste(false);
         }
-        backup_do(main.Main.getBackup(),CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
-
     }
 }

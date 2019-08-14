@@ -1,11 +1,11 @@
 package commands;
 
 import java.util.*;
-import main.Main.*;
-import commands.CommandAdd;
+
+import main.TextsandAuxs;
+import main.TryCatch;
 
 import static main.Main.*;
-import static main.Texts.*;
 
 public class CommandDetails implements Command{
 
@@ -34,16 +34,15 @@ public class CommandDetails implements Command{
             return ; 
         }
 
-        main.Texts.getDetailsText();
+        TextsandAuxs.getDetailsText();
 
-        command_dados = input.nextInt();
+        command_dados = TryCatch.detailsTry();
         input.nextLine();
         aux=0;
         switch(command_dados)
         {
             case 1:
                 while(aux==0) {
-                    input.nextLine();
                     System.out.println("Digite o novo nome do funcionário");
                     name = input.nextLine();
 
@@ -59,7 +58,6 @@ public class CommandDetails implements Command{
             case 2:
                 while(aux==0)
                 {
-                    input.nextLine();
                     System.out.println("Digite o novo endereço do funcionário");
                     adress = input.nextLine();
 
@@ -75,8 +73,7 @@ public class CommandDetails implements Command{
             case 3:
                 while(aux==0)
                 {
-                    input.nextLine();
-                    main.Texts.getDetailsTypeText();
+                    TextsandAuxs.getDetailsTypeText();
                     type = main.TryCatch.intTry();
 
                     if(type==1)
@@ -96,8 +93,7 @@ public class CommandDetails implements Command{
             case 4:
                 while(aux==0)
                 {
-                    input.nextLine();
-                    main.Texts.getDetailsPaymentText();
+                    TextsandAuxs.getDetailsPaymentText();
                     type = main.TryCatch.intTry();
 
                     if(type==1)
@@ -116,7 +112,6 @@ public class CommandDetails implements Command{
 
                 break;
             case 5:
-                input.nextLine();
                 System.out.println("O funcionário pertence ao sindicato?");
                 System.out.println("0 --> Não");
                 System.out.println("1 --> Sim");
@@ -172,7 +167,5 @@ public class CommandDetails implements Command{
                 break;
 
         }
-        backup_do(main.Main.getBackup(),CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
-        
     }
 }

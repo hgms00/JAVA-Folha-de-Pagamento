@@ -1,9 +1,9 @@
 package commands;
 
 import java.util.*;
-import main.Main.*;
-import commands.CommandAdd;
-import static main.Main.backup_do;
+
+import main.FactoryHorista;
+
 import static main.Main.buscarFuncionario;
 
 public class CommandTimecard implements Command {
@@ -36,16 +36,14 @@ public class CommandTimecard implements Command {
             CommandAdd.getEmployee()[indice].setIn_work(false);
             CommandAdd.getEmployee()[indice].setHora_saida(main.Main.getHora());
 
-            if(CommandAdd.getEmployee()[indice] instanceof main.Horista)
+            if(CommandAdd.getEmployee()[indice] instanceof FactoryHorista)
             {
-                ((main.Horista) CommandAdd.getEmployee()[indice]).setHoras_diarias(((CommandAdd.getEmployee()[indice].getHora_saida()-(CommandAdd.getEmployee()[indice].getHora_entrada()))));
+                ((FactoryHorista) CommandAdd.getEmployee()[indice]).setHoras_diarias(((CommandAdd.getEmployee()[indice].getHora_saida()-(CommandAdd.getEmployee()[indice].getHora_entrada()))));
                 CommandAdd.getEmployee()[indice].setHora_entrada(0);
                 CommandAdd.getEmployee()[indice].setHora_saida(0);
             }
 
             System.out.println("Ponto de saída computado com sucesso");
         }
-        backup_do(main.Main.getBackup(),CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
-
     }
 }

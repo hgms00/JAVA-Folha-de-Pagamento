@@ -16,13 +16,14 @@ public class CommandNewSchedule implements Command{
 
         main.Main.addQt_agendas();
         System.out.println("Digite o tipo de agenda a ser adicionada");
+        System.out.println("FORMATO 1: mensal x");
+        System.out.println("FORMATO 2: semanal x segunda");
 
         name = input.nextLine();
 
         setAgendas(main.Main.getAgendas(),name,main.Main.getQt_agendas());
 
         System.out.println("Agenda adicionada como sucesso");
-
 
     }
 }

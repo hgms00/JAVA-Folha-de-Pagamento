@@ -3,7 +3,6 @@ package commands;
 import java.util.*;
 import main.Main.*;
 import commands.CommandAdd;
-import static main.Main.backup_do;
 import static main.Main.buscarFuncionario;
 
 public class CommandServiceTax implements Command{
@@ -33,6 +32,6 @@ public class CommandServiceTax implements Command{
         taxa_servico = main.TryCatch.doubleTry();
 
         CommandAdd.getEmployee()[indice].setTaxa_servico(taxa_servico);
-        backup_do(main.Main.getBackup(),CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
+
     }
 }

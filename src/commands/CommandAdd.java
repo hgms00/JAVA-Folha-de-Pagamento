@@ -3,13 +3,11 @@ package commands;
 
 import java.util.Scanner;
 import main.*;
-import main.TryCatch.*;
 
-import static main.Main.backup_do;
 
 public class CommandAdd implements Command{
-    static FactoryFuncionario[] employee = new FactoryFuncionario[1000];
-    static int qt_funcionario = 0;
+    public static FactoryFuncionario[] employee = new FactoryFuncionario[1000];
+    private static int qt_funcionario = 0;
 
     public static int getQt_funcionario() {
         return qt_funcionario;
@@ -19,6 +17,23 @@ public class CommandAdd implements Command{
         return employee;
     }
 
+    public static void setEmployee(FactoryFuncionario[] employee) {
+        //CommandAdd.employee = employee;
+    }
+
+    public static FactoryFuncionario addFuncionario(int type)
+    {
+        if(type==1) {
+            return new FactoryHorista();
+        }
+        else if (type==2) {
+
+            return new FactorySalariado();
+        }
+        else {
+            return new FactoryComissionado();
+        }
+    }
     public void execute()
     {
         Manager slot;
@@ -40,14 +55,15 @@ public class CommandAdd implements Command{
 
         //-----------------TYPE-----------------------------
         System.out.println("Selecione o tipo do funcionário");
-        System.out.println("1 --> Horista");
-        System.out.println("2 --> Assalariado");
-        System.out.println("3 --> Comissionado");
+        System.out.println("1 --> FactoryHorista");
+        System.out.println("2 --> FactorySalariado");
+        System.out.println("3 --> FactoryComissionado");
 
         type = main.TryCatch.intTry();
 
 
-        employee[qt_funcionario] = employee[qt_funcionario].addFuncionario(type);
+        employee[qt_funcionario] = CommandAdd.addFuncionario(type);
+        employee[qt_funcionario].setTipo_da_agenda(type);
         employee[qt_funcionario].setType(type);
         //--------------------------------------------
 
@@ -114,7 +130,6 @@ public class CommandAdd implements Command{
         employee[qt_funcionario].setID(id);
 
         System.out.printf("--> O ID de funcionário é : %d\n",id);
-        backup_do(main.Main.getBackup(),qt_funcionario,employee);
     }
 
 

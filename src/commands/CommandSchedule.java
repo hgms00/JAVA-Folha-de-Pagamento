@@ -3,7 +3,6 @@ package commands;
 import java.util.*;
 import main.Main.*;
 import commands.CommandAdd;
-import static main.Main.backup_do;
 import static main.Main.buscarFuncionario;
 
 public class CommandSchedule implements Command {
@@ -29,7 +28,7 @@ public class CommandSchedule implements Command {
 
         for(aux=1;aux<=main.Main.getQt_agendas();aux++)
         {
-            System.out.printf("%d --> %s",aux,main.Main.getAgendas()[aux].getName());
+            System.out.printf("%d --> %s\n",aux,main.Main.getAgendas()[aux].getName());
         }
         aux = main.TryCatch.anyIntTry();
         CommandAdd.getEmployee()[indice].setTipo_da_agenda(aux);

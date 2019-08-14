@@ -1,9 +1,8 @@
 package commands;
 
 import java.util.*;
-import main.Main.*;
-import commands.CommandAdd;
-import static main.Main.backup_do;
+
+import main.FactoryComissionado;
 import static main.Main.buscarFuncionario;
 
 public class CommandSells implements Command {
@@ -26,10 +25,9 @@ public class CommandSells implements Command {
         System.out.println("Digite o dia da venda");
         aux = main.TryCatch.intDayTry();
         System.out.println("Digite o valor da venda");
-        ((main.Comissionado) CommandAdd.getEmployee()[indice]).setValor_venda(input.nextDouble(),aux);
+        if( CommandAdd.getEmployee()[indice] instanceof FactoryComissionado)
+            ((FactoryComissionado) CommandAdd.getEmployee()[indice]).setValor_venda(input.nextDouble(),aux);
 
         System.out.println("Venda computada com sucesso");
-        backup_do(main.Main.getBackup(),CommandAdd.getQt_funcionario(),CommandAdd.getEmployee());
-
     }
 }

@@ -146,4 +146,52 @@ public class TryCatch {
         }
         return doubleTry;
     }
+    public static int initialTry()
+    {
+        int intTry = 0;
+        Scanner input = new Scanner(System.in);
+        boolean flag = false;
+
+        while(!flag) {
+
+            try {
+                intTry=0;
+                flag = true;
+                intTry = input.nextInt();
+                if (intTry < 0 || intTry > 12)
+                    throw new Exception("Fora do intervalo");
+
+            } catch (Exception e) {
+                System.out.println("Por favor, coloque um valor inteiro válido");
+                input.nextLine();
+                flag = false;
+            }
+        }
+
+        return intTry;
+    }
+    public static int detailsTry()
+    {
+        int intTry = 0;
+        Scanner input = new Scanner(System.in);
+        boolean flag = false;
+
+        while(!flag) {
+
+            try {
+                intTry=0;
+                flag = true;
+                intTry = input.nextInt();
+                if (intTry < 0 || intTry > 7)
+                    throw new Exception("Fora do intervalo");
+
+            } catch (Exception e) {
+                System.out.println("Por favor, coloque um valor inteiro válido");
+                input.nextLine();
+                flag = false;
+            }
+        }
+
+        return intTry;
+    }
 }
