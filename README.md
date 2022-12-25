@@ -7,7 +7,7 @@
 Esse projeto foi desenvolvido utilizando a linguagem de programação JAVA e o conceito de orientação a objetos, além de também ser desenvolvido um diagrama UML para planejamento de projeto.
 
 ### Descrição do Projeto
-A simulação do desenvolvimento de uma rede social em CLI, no qual o usuário pode adicionar um amigo e enviar uma mensagem para ele. Sendo assim, o receptor pode ler as mensagens através de uma caixa de entrada,
+O projeto em questão se trata de um sistema de funcionários, no qual existem três tipos de funcionários que batem pontos de maneira diária. O sistema deve calcular a hora trabalhada de cada funcionário e calcular o seu salário com base nisso. 
 
 ### Padrões de Projetos
 - Command
